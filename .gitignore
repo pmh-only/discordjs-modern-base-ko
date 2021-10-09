@@ -1,0 +1,22 @@
+# npm 모듈 폴더
+node_modules/
+
+# tsc 산출물 폴더
+dist/
+
+# 환경 설정 파일
+.env
+
+# npm lock 파일
+# npm 사용시 아래 줄을 지워주세요.
+package-lock.json
+
+# yarn lock 파일
+# npm 사용시 아래 줄의 주석을 풀어주세요.
+# yarn.lock
+
+# yarn 에러 로그 파일
+yarn-error.log
+
+# vim 스왑 파일
+*.swp
