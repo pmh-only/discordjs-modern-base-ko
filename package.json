@@ -7,9 +7,9 @@
   "license": "",
   "scripts": {
     "start": "node .",
-    "build": "tsc",
-    "dev:watch": "nodemon -e ts --exec 'tsc && node . || exit 1'",
-    "dev": "tsc && node ."
+    "build": "ts-cleaner && tsc",
+    "dev:watch": "nodemon -e ts --exec 'ts-cleaner && tsc && node . || exit 1'",
+    "dev": "ts-cleaner && tsc && node ."
   },
   "devDependencies": {
     "@types/node": "^16.10.3",
@@ -20,7 +20,8 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "ts-cleaner": "^1.0.5"
   },
   "dependencies": {
     "discord.js": "^13.2.0",

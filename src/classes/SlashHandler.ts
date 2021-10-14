@@ -14,10 +14,10 @@ export default class SlashHandler {
     const commandFiles = readdirSync(commandPath)
 
     for (const commandFile of commandFiles) {
-      const commandName = commandFile.split('.').slice(0, -1).join('.')
-
       // eslint-disable-next-line new-cap
-      this.commands.set(commandName, new (require(_.COMMAND_PATH(commandFile)).default)())
+      const command = new (require(_.COMMAND_PATH(commandFile)).default)() as Command
+
+      this.commands.set(command.metadata.name, command)
     }
   }
 
