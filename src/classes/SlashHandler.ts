@@ -4,6 +4,8 @@ import _ from '../consts'
 import BotClient from './BotClient'
 import Command from '../interfaces/Command'
 
+const { ENVIROMENT_DEV_GUILD } = process.env
+
 export default class SlashHandler {
   public commands: Map<string, Command>
 
@@ -23,7 +25,7 @@ export default class SlashHandler {
 
   public runCommand (interaction: CommandInteraction) {
     const commandName = interaction.commandName
-    const command = this.commands.get(commandName)
+    const command = this.commands.get(commandName.startsWith('-') ? commandName.replace('-', '') : commandName)
 
     if (!command) return
     command.run(interaction)
@@ -36,14 +38,18 @@ export default class SlashHandler {
     for (const command of this.commands.values()) {
       if (!command.metadata) continue
 
+      if (ENVIROMENT_DEV_GUILD) {
+        command.metadata.name = `-${command.metadata.name}`
+      }
+
       metadatas.push(command.metadata)
     }
 
-    if (process.env.ENVIROMENT?.toUpperCase() === 'DEV') {
-      await client.application.commands.set([], process.env.ENVIROMENT_DEV_GUILD!)
-      await client.application.commands.set(metadatas, process.env.ENVIROMENT_DEV_GUILD!)
+    if (ENVIROMENT_DEV_GUILD) {
+      await client.application.commands.set([], ENVIROMENT_DEV_GUILD!)
+      await client.application.commands.set(metadatas, ENVIROMENT_DEV_GUILD!)
 
-      console.log('Registered commands for guild:', process.env.ENVIROMENT_DEV_GUILD!)
+      console.log('Registered commands for guild:', ENVIROMENT_DEV_GUILD!)
       return
     }
 

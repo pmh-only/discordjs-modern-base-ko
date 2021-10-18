@@ -7,7 +7,7 @@ export default function onReady () {
   console.log('Ready!', client.user.username)
   client.user.setActivity('with your heart')
 
-  if (process.env.REFRESH_SLASH_COMMAND_ON_READY === 'true') {
+  if (process.env.ENVIROMENT_DEV_GUILD) {
     slash.registCachedCommands(client)
   }
 }

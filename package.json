@@ -7,9 +7,10 @@
   "license": "",
   "scripts": {
     "start": "node .",
-    "build": "ts-cleaner && tsc",
-    "dev:watch": "nodemon -e ts --exec 'ts-cleaner && tsc && node . || exit 1'",
-    "dev": "ts-cleaner && tsc && node ."
+    "build": "(rm -rf dist/commands || true) && tsc",
+    "dev:watch": "nodemon -e ts --exec '(rm -rf dist/commands || true) && tsc && node . || exit 1'",
+    "dev": "(rm -rf dist/commands || true) && tsc && node .",
+    "regist": "(rm -rf dist/commands || true) && tsc && node dist/init.js"
   },
   "devDependencies": {
     "@types/node": "^16.10.3",
@@ -20,8 +21,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "nodemon": "^2.0.13",
-    "ts-cleaner": "^1.0.5"
+    "nodemon": "^2.0.13"
   },
   "dependencies": {
     "discord.js": "^13.2.0",
